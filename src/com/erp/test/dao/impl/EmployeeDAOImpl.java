@@ -14,20 +14,80 @@ import com.erp.test.vo.EmployeeVO;
 public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
-	public EmployeeVO insertEmployee(EmployeeVO employee) {
-
-		return null;
+	public int  insertEmployee(EmployeeVO employee) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			conn = Connector.getConnection();
+			String sql = "insert into employee ("
+					+ " emp_no, emp_name, emp_credat, emp_salary, grd_no)"
+					+ " values(seq_emp_no.nextval, ?, sysdate,?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, employee.getEmpName());
+			ps.setInt(2, employee.getEmpSalary());
+			ps.setInt(3, employee.getGrdNo());
+			result = ps.executeUpdate();
+			conn.commit();
+			return result; 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Connector.close(ps, conn);
+		}
+		return 0;
 	}
 
 	@Override
-	public EmployeeVO updateEmployee(EmployeeVO employee) {
-		return null;
+	public int  updateEmployee(EmployeeVO employee) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			conn = Connector.getConnection();
+			String sql = "update employee set emp_name=?,"
+					+ " emp_salary=?,"
+					+ " emp_active=?,"
+					+ " grd_no=?,"
+					+ " emp_credat=?"
+					+ " where emp_no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, employee.getEmpName());
+			ps.setInt(2, employee.getEmpSalary());
+			ps.setInt(3, employee.getEmpActive());
+			ps.setInt(4, employee.getGrdNo());
+			ps.setString(5, employee.getEmpCredat());
+			ps.setInt(6, employee.getEmpNo());			
+			result = ps.executeUpdate();
+			conn.commit();
+			return result; 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Connector.close(ps, conn);
+		}
+		return 0;
 	}
 
 	@Override
-	public EmployeeVO deleteEmployee(EmployeeVO employee) {
-
-		return null;
+	public int  deleteEmployee(EmployeeVO employee) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			conn = Connector.getConnection();
+			String sql = "delete from employee where emp_no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, employee.getEmpNo());
+			result = ps.executeUpdate();
+			conn.commit();
+			return result; 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Connector.close(ps, conn);
+		}
+		return 0;
 	}
 
 	@Override
@@ -38,7 +98,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		ResultSet rs = null;
 		try {
 			conn = Connector.getConnection();
-			String sql = "select emp_no, emp_name, emp_salary, smp_credat, emp_active, grd_no, grd_name from employee e,"
+			String sql = "select e.emp_no, e.emp_name, e.emp_salary, e.emp_credat, e.emp_active, g.grd_no, g.grd_name from employee e,"
 					+ " grade g "
 					+ " where e.grd_no=g.grd_no and e.emp_no=?";
 			ps = conn.prepareStatement(sql);
@@ -47,9 +107,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			if (rs.next()) {
 				emp.setEmpNo(rs.getInt("emp_no"));
 				emp.setEmpName(rs.getString("emp_name"));
-				emp.setEmpSalaty(rs.getInt("emp_salary"));
+				emp.setEmpSalary(rs.getInt("emp_salary"));
 				emp.setEmpCredat(rs.getString("emp_credat"));
-				emp.setGrdNo(rs.getInt("grd_no"));
+				emp.setGrdName(rs.getString("grd_name"));
 				emp.setEmpActive(rs.getInt("emp_active"));
 			}
 			return emp;
@@ -69,17 +129,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		ResultSet rs = null;
 		try {
 			conn = Connector.getConnection();
-			String sql = "select emp_no, emp_name, emp_salary, smp_credat, emp_active, grd_no from employee";
+			String sql = "select e.emp_no, e.emp_name, e.emp_active, g.grd_name from employee e, grade g "
+					+ " where e.grd_no=g.grd_no";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				EmployeeVO emp = new EmployeeVO();
-				employee.setEmpNo(rs.getInt("emp_no"));
-				employee.setEmpName(rs.getString("emp_name"));
-				employee.setEmpSalaty(rs.getInt("emp_salary"));
-				employee.setEmpCredat(rs.getString("emp_credat"));
-				employee.setGrdNo(rs.getInt("grd_no"));
-				employee.setEmpActive(rs.getInt("emp_active"));
+				emp.setEmpNo(rs.getInt("emp_no"));
+				emp.setEmpName(rs.getString("emp_name"));
+				emp.setGrdName(rs.getString("grd_name"));
+				emp.setEmpActive(rs.getInt("emp_active"));
 				employeeList.add(emp);
 			}
 			return employeeList;
@@ -94,8 +153,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public static void main(String[] args) {
 		EmployeeDAO e = new EmployeeDAOImpl();
 		EmployeeVO emp = new EmployeeVO();
-		emp.setEmpNo(1);
-		e.selectEmployee(emp);
+		emp.setEmpNo(150);
+//		System.out.println(e.selectEmployee(emp));
+		
+//		System.out.println(e.selectEmployeeList(null));
+		
+//		System.out.println(e.deleteEmployee(emp));
+		
 	}
 
 }

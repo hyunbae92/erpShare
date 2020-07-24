@@ -4,10 +4,17 @@ public class EmployeeVO {
 	private int empNo;
 	private String empName;
 	private String empCredat;
-	private int empSalaty;
+	private int empSalary;
 	private int grdNo;
 	private int empActive;
+	private String grdName;
 	
+	public String getGrdName() {
+		return grdName;
+	}
+	public void setGrdName(String grdName) {
+		this.grdName = grdName;
+	}
 	public int getEmpNo() {
 		return empNo;
 	}
@@ -26,11 +33,11 @@ public class EmployeeVO {
 	public void setEmpCredat(String empCredat) {
 		this.empCredat = empCredat;
 	}
-	public int getEmpSalaty() {
-		return empSalaty;
+	public int getEmpSalary() {
+		return empSalary;
 	}
-	public void setEmpSalaty(int empSalaty) {
-		this.empSalaty = empSalaty;
+	public void setEmpSalary(int empSalary) {
+		this.empSalary = empSalary;
 	}
 	public int getGrdNo() {
 		return grdNo;
@@ -46,8 +53,8 @@ public class EmployeeVO {
 	}
 	@Override
 	public String toString() {
-		return "EmployeeVO [empNo=" + empNo + ", empName=" + empName + ", empCredat=" + empCredat + ", empSalaty="
-				+ empSalaty + ", grdNo=" + grdNo + ", empActive=" + empActive + "]";
+		return "EmployeeVO [empNo=" + empNo + ", empName=" + empName + ", empCredat=" + empCredat + ", empSalary="
+				+ empSalary + ", grdNo=" + grdNo + ", empActive=" + empActive + ", grdName=" + grdName + "]";
 	}
 	
 }

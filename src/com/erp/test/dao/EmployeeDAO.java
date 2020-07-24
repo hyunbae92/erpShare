@@ -6,9 +6,9 @@ import com.erp.test.vo.EmployeeVO;
 
 public interface EmployeeDAO {
 
-	EmployeeVO insertEmployee(EmployeeVO employee);
-	EmployeeVO updateEmployee(EmployeeVO employee);
-	EmployeeVO deleteEmployee(EmployeeVO employee);
+	int insertEmployee(EmployeeVO employee);
+	int updateEmployee(EmployeeVO employee);
+	int deleteEmployee(EmployeeVO employee);
 	EmployeeVO selectEmployee(EmployeeVO employee);
 	List<EmployeeVO> selectEmployeeList(EmployeeVO employee);
 }
