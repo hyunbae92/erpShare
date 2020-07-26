@@ -28,8 +28,10 @@ public class EmployeeServlet extends HttpServlet {
 			return;
 		}else if("/employee/employee-view".equals(uri)) {
 			EmployeeVO emp =new EmployeeVO();
+			GradeService gradeservice = new GradeServiceImpl();
 			emp.setEmpNo(Integer.parseInt(request.getParameter("emp_no").toString()));
 			request.setAttribute("employee", employeeService.doSelectEmployee(emp));
+			request.setAttribute("gradeList", gradeservice.doSelectGradeList(null));
 			RequestDispatcher rd = request.getRequestDispatcher("/views/employee/employee-view");
 			rd.forward(request, response);
 			return;

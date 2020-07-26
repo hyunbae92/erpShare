@@ -110,6 +110,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				emp.setEmpSalary(rs.getInt("emp_salary"));
 				emp.setEmpCredat(rs.getString("emp_credat"));
 				emp.setGrdName(rs.getString("grd_name"));
+				emp.setGrdNo(rs.getInt("grd_name"));
 				emp.setEmpActive(rs.getInt("emp_active"));
 			}
 			return emp;
