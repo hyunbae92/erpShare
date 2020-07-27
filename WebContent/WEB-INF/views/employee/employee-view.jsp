@@ -17,33 +17,38 @@
 	</tr>
 	<tr>
 		<th>사원이름</th>
-		<td><input type="text" name="emp_name" value="{employee.empName}"></td>
+		<td><input type="text" name="emp_name" value="${employee.empName}"></td>
 	</tr>
 	<tr>
 		<th>월급</th>
-		<td><input type="text" name="emp_salary" value="{employee.empSalary}"></td>
+		<td><input type="text" name="emp_salary" value="${employee.empSalary}"></td>
 	</tr>
 	<tr>
 		<th>입사일</th>
-		<td><input type="text" name="emp_credat" value="{employee.empCredat}"></td>
+		<td>${employee.empCredat}</td>
 	</tr>
 	<tr>
 		<th>직급</th>
 			<td>
-			<select name="grd_no">
-				<c:forEach items="${gradeList}" var="grade">
-					<option value="${grade.grd_no}">${grade.grd_name}</option>
-				</c:forEach>
-			</select>
-		</td>
-	</tr>
+				<select name="grd_no">
+					<c:forEach items="${gradeList}" var="grade">
+						<option value="${grade.grd_no}"
+						<c:if test="${employee.grdNo==grade.grd_no}">
+						selected
+						</c:if>
+						>${grade.grd_no}.${grade.grd_name}</option>
+					</c:forEach>
+				</select>
+			</td>
+		</tr>
 	<tr>
 		<th>재직여부</th>
-		<td><input type="text" name="emp_active" value="{employee.empActive}"></td>
+		<td>${employee.empActive}</td>
 	</tr>
 </table>
 <button>수정</button><button type="button" onclick='doDelete()'>삭제</button>
 </form>
+<a href="/employee/employee-list"><button>목록으로</button></a>
 </body>
 <script>
 	function doDelete(){

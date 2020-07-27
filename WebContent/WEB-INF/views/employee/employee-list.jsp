@@ -11,7 +11,7 @@
 <table border="1">
 	<tr>
  		<th>사원번호</th>
- 		<th>사원이름</th>
+ 		<th>사원명</th>
  		<th>직급</th>
  		<th>재직여부</th>
 	</tr>

@@ -47,17 +47,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			conn = Connector.getConnection();
 			String sql = "update employee set emp_name=?,"
 					+ " emp_salary=?,"
-					+ " emp_active=?,"
-					+ " grd_no=?,"
-					+ " emp_credat=?"
+					+ " grd_no=?"
 					+ " where emp_no=?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, employee.getEmpName());
 			ps.setInt(2, employee.getEmpSalary());
-			ps.setInt(3, employee.getEmpActive());
-			ps.setInt(4, employee.getGrdNo());
-			ps.setString(5, employee.getEmpCredat());
-			ps.setInt(6, employee.getEmpNo());			
+			ps.setInt(3, employee.getGrdNo());
+			ps.setInt(4, employee.getEmpNo());			
 			result = ps.executeUpdate();
 			conn.commit();
 			return result; 
@@ -76,7 +72,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		int result = 0;
 		try {
 			conn = Connector.getConnection();
-			String sql = "delete from employee where emp_no=?";
+			String sql = "update employee set"
+					+ " emp_active=0"
+					+ " where emp_no=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, employee.getEmpNo());
 			result = ps.executeUpdate();
@@ -110,7 +108,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				emp.setEmpSalary(rs.getInt("emp_salary"));
 				emp.setEmpCredat(rs.getString("emp_credat"));
 				emp.setGrdName(rs.getString("grd_name"));
-				emp.setGrdNo(rs.getInt("grd_name"));
+				emp.setGrdNo(rs.getInt("grd_no"));
 				emp.setEmpActive(rs.getInt("emp_active"));
 			}
 			return emp;
