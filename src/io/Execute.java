@@ -9,8 +9,8 @@ import java.util.Map;
 import com.erp.test.common.Connector;
 
 public class Execute {
-
-	public static void main(String[] args) {
+	
+	public static void insertlogic(String name) {
 		String key = "DONG_CODE\r\n" + 
 				"SIDO\r\n" + 
 				"GUGUN\r\n" + 
@@ -28,7 +28,8 @@ public class Execute {
 				"DETAIL_BUILDING_NAME\r\n" + 
 				"ADDR_CODE";
 		String[] keys = key.split("\r\n");
-		String str = ReadText.readText("c:\\build_sejong.txt","MS949","<>");
+		String fileName = "C:\\java_study\\address\\"+name;
+		String str = ReadText.readText(fileName,"MS949","<>");
 		List<Map<String,String>> phList = ReadText.parse(keys,str,"<>");
 		String sql = "insert into address(";
 		String values = " values(";
@@ -50,9 +51,12 @@ public class Execute {
 			}
 			conn.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) {
+		
 		
 	}
 	
