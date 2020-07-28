@@ -10,7 +10,7 @@ public class Connector {
 
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521/xe";
 	private static final String USER = "c##test";
-	private static final String PASSWORD = "c##test";
+	private static final String PASSWORD = "test";
 	private static final String DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
 	private static Connection conn = null;
 	static {
