@@ -10,7 +10,7 @@ import com.erp.test.common.Connector;
 
 public class Execute {
 	
-	public static void insertlogic(String name) {
+	public static int insertlogic(String name) {
 		String key = "DONG_CODE\r\n" + 
 				"SIDO\r\n" + 
 				"GUGUN\r\n" + 
@@ -50,9 +50,11 @@ public class Execute {
 				ps.executeUpdate();
 			}
 			conn.commit();
+			return phList.size();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 	public static void main(String[] args) {
