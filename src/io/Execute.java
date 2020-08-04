@@ -43,11 +43,21 @@ public class Execute {
 		Connection conn = Connector.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
+			int cnt = 1;
 			for(Map<String,String> row:phList) {
 				for(int i=0;i<keys.length;i++) {
 					ps.setString((i+1), row.get(keys[i]));
 				}
-				ps.executeUpdate();
+				ps.addBatch();
+				if(cnt%1000==0){
+					ps.executeBatch();
+					ps.clearBatch();
+				}
+				cnt++;
+			}
+			if(phList.size()%1000!=0) {
+				ps.executeBatch();
+				ps.clearBatch();
 			}
 			conn.commit();
 			return phList.size();
@@ -58,8 +68,9 @@ public class Execute {
 	}
 
 	public static void main(String[] args) {
-		
-		
+		System.out.println("입력시작");
+//		Execute.insertlogic("build_sejong.txt");
+		System.out.println("입력완료");
 	}
 	
 	

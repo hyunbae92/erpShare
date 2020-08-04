@@ -11,8 +11,10 @@ public class FolderTest {
 			for(File file:files) {
 				if(!file.isDirectory() &&file.getName().indexOf("build_")==0) {
 					System.out.println(file.getName()+"입력시작");
+					long sTime = System.currentTimeMillis();
 					Execute.insertlogic(file.getName());
-					System.out.println(file.getName()+"한개완료");
+					long eTime = System.currentTimeMillis();
+					System.out.println(file.getName()+"한개완료, 실행시간 : "+(eTime-sTime));
 				}
 			}
 		}

@@ -1,0 +1,6 @@
+create TABLESPACE hyun
+datafile 'C:\oraclexe\app\oracle\oradata\XE\HYUN.DBF'
+size 1024M
+AUTOEXTEND on NEXT 8M;
+
+ocale db 파일만들기 기본 ----------
