@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+function three(){
+	var max = document.querySelector('#maxNum').value;
+	var str = '<table border="1">';
+	for(var i=1;i<=max;i++){
+		if(i%10==1){
+			str += '<tr>';
+		}
+		if(i.toString().indexOf('3')!=-1 || i.toString().indexOf('6')!=-1 || i.toString().indexOf('9')!=-1){
+			var tmp = i.toString();
+			str += '<td>'
+			while(tmp.indexOf('3')!=-1){
+				tmp = tmp.replace('3','0');
+				str += '짝'
+			}
+			while(tmp.indexOf('6')!=-1){
+				tmp = tmp.replace('6','0');
+				str += '짝'
+			}
+			while(tmp.indexOf('9')!=-1){
+				tmp = tmp.replace('9','0');
+				str += '짝'
+			}
+			str += '</td>'
+		}else{
+			str += '<td>'+i+'</td>';
+		}
+		if(i%10==0){
+			str += '</tr>';
+		}
+	}
+	str += '</table>'
+	document.querySelector('#rDiv').innerHTML = str;
+}
+</script>
+
+<input type="number" id="maxNum">
+<button onclick="three()">삼육구</button>
+<div id="rDiv"></div>
+</body>
+</html>

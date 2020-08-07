@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery-3.5.1.js"></script>
+<style>
+div{
+	width:100px;
+	height:100px;
+	background-color:red;
+	position:absolute;
+}
+</style>
+</head>
+<body>
+<button id="move">움직여랏!</button>
+<button id="back">돌아와랏!</button>
+<div id="rDiv">무빙박스</div>
+<script>
+$('#move').click(function(){
+	$('#rDiv').animate({left:'400px',top:'400px',width:'200px',height:'200px'})
+});
+$('#back').click(function(){
+	$('#rDiv').animate({left:'0px',top:'50px',width:'100px',height:'100px'})
+});
+</script>
+</body>
+</html>

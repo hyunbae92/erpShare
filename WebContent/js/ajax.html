@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+function Calc(num1,num2){
+	this.add = function(){
+		return num1+num2;
+	}
+	this.minus = function(){
+		return num1-num2;
+	}
+	this.division = function(){
+		return num1/num2;
+	}
+	this.muliple = function(){
+		return num1*num2;
+	}
+}
+
+var c = new Calc(4,2);
+var result = c.add();
+
+function Person(){
+	this.name;
+	this.age;
+}
+
+var p = new Person();
+var pList = [];
+for(var i=1;i<=10;i++){
+	p.name = '즐 '+i;
+	p.age = i+10;
+	pList.push(p);
+}
+
+
+
+
+</script>
+</body>
+</html>
